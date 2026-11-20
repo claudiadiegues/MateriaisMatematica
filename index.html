@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Materiais de Matemática</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6f64'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='white' font-family='Georgia,serif' font-style='italic'%3E%CF%80%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#f6f4ef; --card:#ffffff; --ink:#1d2523; --muted:#66706d; --line:#e4e1d9;
+    --accent:#1f6f64; --accent-soft:#e3efec;
+    --slides:#2f6fb3; --ficha:#c7671e; --resolucao:#2e8b57; --resumo:#8a4fb5; --app:#b8424f; --outro:#6b7280;
+    --radius:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#141917; --card:#1d2422; --ink:#e8ecea; --muted:#9aa5a1; --line:#2c3532;
+           --accent:#5cc3b2; --accent-soft:#1f3531; }
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,sans-serif}
+  .wrap{max-width:880px;margin:0 auto;padding:0 18px}
+
+  header{background:var(--accent);color:#fff;padding:34px 0 64px;position:relative;overflow:hidden}
+  @media (prefers-color-scheme: dark){ header{background:#173f39} }
+  header::after{content:"π  ∑  √  ∫  △  ∞  ≈  ∈";position:absolute;right:-10px;top:8px;
+       font:italic 64px/1 Georgia,serif;letter-spacing:22px;opacity:.08;white-space:nowrap;pointer-events:none}
+  h1{margin:0;font:600 clamp(26px,5vw,36px)/1.15 Georgia,"Times New Roman",serif}
+  .sub{margin:8px 0 0;opacity:.85;font-size:15px}
+
+  .panel{margin-top:-40px;position:relative;z-index:1}
+  .tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .tab{all:unset;cursor:pointer;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+       padding:14px 18px;box-shadow:0 2px 10px rgba(0,0,0,.06);transition:.15s}
+  .tab b{display:block;font-size:18px}
+  .tab span{display:block;color:var(--muted);font-size:13px}
+  .tab[aria-selected="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset,0 4px 14px rgba(0,0,0,.08)}
+  .tab:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+  .tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:18px 0 6px}
+  .search{flex:1 1 220px;position:relative}
+  .search input{width:100%;font:inherit;padding:11px 14px 11px 40px;border-radius:999px;border:1px solid var(--line);
+       background:var(--card);color:var(--ink)}
+  .search input:focus{outline:2px solid var(--accent);border-color:transparent}
+  .search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);opacity:.5}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{all:unset;cursor:pointer;font-size:13px;padding:6px 12px;border-radius:999px;border:1px solid var(--line);
+       background:var(--card);color:var(--muted)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .chip:focus-visible{outline:2px solid var(--accent)}
+
+  .novos{margin:18px 0 4px;padding:14px 16px;border-radius:var(--radius);background:var(--accent-soft)}
+  .novos h2{margin:0 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+  .novos ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px 14px}
+  .novos a{color:var(--ink);text-decoration:none;font-size:15px;border-bottom:1px solid currentColor}
+  .novos a:hover{color:var(--accent)}
+
+  details.tema{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin:14px 0;overflow:hidden}
+  summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;gap:10px}
+  summary::-webkit-details-marker{display:none}
+  summary h3{margin:0;font:600 20px/1.2 Georgia,"Times New Roman",serif;flex:1}
+  summary .n{font-size:13px;color:var(--muted)}
+  summary .seta{transition:transform .2s;opacity:.5}
+  details[open] summary .seta{transform:rotate(90deg)}
+  summary:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+  ul.lista{list-style:none;margin:0;padding:0 8px 8px}
+  .item a{display:flex;align-items:center;gap:14px;padding:10px;border-radius:10px;color:inherit;text-decoration:none}
+  .item a:hover{background:var(--accent-soft)}
+  .item a:focus-visible{outline:2px solid var(--accent)}
+  .ico{flex:none;width:42px;height:42px;border-radius:10px;display:grid;place-items:center;color:#fff;
+       font-size:11px;font-weight:700;letter-spacing:.03em}
+  .txt{flex:1;min-width:0}
+  .tit{font-weight:600}
+  .meta{font-size:13px;color:var(--muted)}
+  .badge{display:inline-block;margin-left:6px;font-size:10.5px;font-weight:700;letter-spacing:.05em;
+       padding:2px 7px;border-radius:999px;background:#f2b84b;color:#3a2a00;vertical-align:2px}
+  .go{flex:none;opacity:.35}
+  .item a:hover .go{opacity:.8}
+
+  .vazio{text-align:center;color:var(--muted);padding:40px 0}
+  footer{color:var(--muted);font-size:13px;text-align:center;padding:30px 0 40px}
+  @media (max-width:520px){ .tab b{font-size:16px} summary h3{font-size:18px} .ico{width:38px;height:38px} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1 id="titulo"></h1>
+    <p class="sub" id="subtitulo"></p>
+  </div>
+</header>
+
+<main class="wrap panel">
+  <div class="tabs" role="tablist" id="tabs"></div>
+
+  <div class="tools">
+    <label class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="q" placeholder="Procurar materiais…" aria-label="Procurar materiais">
+    </label>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <section class="novos" id="novos" hidden>
+    <h2>Novo esta semana</h2>
+    <ul id="novosLista"></ul>
+  </section>
+
+  <div id="temas"></div>
+</main>
+
+<footer id="rodape"></footer>
+
+<script src="materiais.js"></script>
+<script>
+const TIPOS = {
+  slides:    {nome:"Slides",    abrev:"SLD", cor:"var(--slides)"},
+  ficha:     {nome:"Ficha",     abrev:"FT",  cor:"var(--ficha)"},
+  resolucao: {nome:"Resolução", abrev:"RES", cor:"var(--resolucao)"},
+  resumo:    {nome:"Resumo",    abrev:"RSM", cor:"var(--resumo)"},
+  app:       {nome:"Aplicação", abrev:"APP", cor:"var(--app)"},
+  outro:     {nome:"Outro",     abrev:"•••", cor:"var(--outro)"},
+};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const norm = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+const hoje = new Date(); hoje.setHours(0,0,0,0);
+const dataObj = d => { const [a,m,dd] = (d||"").split("-").map(Number); return a ? new Date(a,m-1,dd) : null; };
+const ehNovo = m => { const d = dataObj(m.data); return d && (hoje - d)/864e5 <= CONFIG.diasNovo && d <= hoje; };
+const fmtData = d => { const o = dataObj(d); return o ? o.toLocaleDateString("pt-PT",{day:"numeric",month:"short"}) : ""; };
+const ehLink = f => /^https?:\/\//.test(f);
+
+let disc = DISCIPLINAS.find(d => "#"+d.id === location.hash)?.id || DISCIPLINAS[0].id;
+let filtroTipo = null;
+const abertos = {};   // estado aberto/fechado de cada tema
+
+$("#titulo").textContent = CONFIG.titulo;
+$("#subtitulo").textContent = CONFIG.subtitulo;
+document.title = CONFIG.titulo;
+$("#rodape").textContent = CONFIG.subtitulo.split("·")[0].trim();
+
+function desenharTabs(){
+  $("#tabs").innerHTML = DISCIPLINAS.map(d => `
+    <button class="tab" role="tab" aria-selected="${d.id===disc}" data-id="${d.id}">
+      <b>${esc(d.nome)}</b><span>${esc(d.descricao)}</span>
+    </button>`).join("");
+  $("#tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => {
+    disc = b.dataset.id; filtroTipo = null; history.replaceState(null,"","#"+disc); tudo();
+  });
+}
+
+function desenharChips(lista){
+  const usados = Object.keys(TIPOS).filter(t => lista.some(m => m.tipo === t));
+  $("#chips").innerHTML = usados.map(t =>
+    `<button class="chip" aria-pressed="${filtroTipo===t}" data-t="${t}">${TIPOS[t].nome}</button>`).join("");
+  $("#chips").querySelectorAll(".chip").forEach(c => c.onclick = () => {
+    filtroTipo = filtroTipo === c.dataset.t ? null : c.dataset.t; tudo();
+  });
+}
+
+function itemHTML(m){
+  const t = TIPOS[m.tipo] || TIPOS.outro;
+  const ext = ehLink(m.ficheiro);
+  const meta = [t.nome, fmtData(m.data)].filter(Boolean).join(" · ");
+  return `<li class="item"><a href="${esc(m.ficheiro)}" target="_blank" rel="noopener">
+      <span class="ico" style="background:${t.cor}">${t.abrev}</span>
+      <span class="txt">
+        <span class="tit">${esc(m.titulo)}</span>${ehNovo(m) ? '<span class="badge">NOVO</span>' : ""}
+        <span class="meta" style="display:block">${esc(m.nota ? m.nota + " · " + meta : meta)}</span>
+      </span>
+      <svg class="go" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${
+        ext ? '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>'
+            : '<path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/>'}</svg>
+    </a></li>`;
+}
+
+function tudo(){
+  desenharTabs();
+  const D = DISCIPLINAS.find(d => d.id === disc);
+  const daDisc = MATERIAIS.filter(m => m.disc === disc);
+  desenharChips(daDisc);
+
+  const q = norm($("#q").value.trim());
+  const filtrados = daDisc.filter(m =>
+    (!filtroTipo || m.tipo === filtroTipo) &&
+    (!q || norm(m.titulo + " " + m.tema + " " + (m.nota||"") + " " + (TIPOS[m.tipo]?.nome||"")).includes(q)));
+
+  // Novidades (só sem pesquisa nem filtro)
+  const novos = daDisc.filter(ehNovo).sort((a,b) => b.data.localeCompare(a.data));
+  $("#novos").hidden = !novos.length || q || filtroTipo;
+  $("#novosLista").innerHTML = novos.map(m =>
+    `<li><a href="${esc(m.ficheiro)}" target="_blank" rel="noopener">${esc(m.titulo)}</a></li>`).join("");
+
+  // Temas na ordem definida; temas não listados vão para o fim
+  const temas = [...D.temas, ...new Set(daDisc.map(m => m.tema).filter(t => !D.temas.includes(t)))];
+  const html = temas.map(tema => {
+    const itens = filtrados.filter(m => m.tema === tema);
+    if (!itens.length) return "";
+    const chave = disc + "|" + tema;
+    const aberto = (q || filtroTipo) ? true : (abertos[chave] ?? true);
+    return `<details class="tema" data-k="${esc(chave)}" ${aberto ? "open" : ""}>
+      <summary>
+        <svg class="seta" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 6 6 6-6 6"/></svg>
+        <h3>${esc(tema)}</h3><span class="n">${itens.length} ${itens.length === 1 ? "material" : "materiais"}</span>
+      </summary>
+      <ul class="lista">${itens.map(itemHTML).join("")}</ul>
+    </details>`;
+  }).join("");
+
+  $("#temas").innerHTML = html || `<p class="vazio">Não encontrei materiais${q ? ` para «${esc($("#q").value)}»` : ""}.</p>`;
+  $("#temas").querySelectorAll("details").forEach(d =>
+    d.addEventListener("toggle", () => { if (!q && !filtroTipo) abertos[d.dataset.k] = d.open; }));
+}
+
+$("#q").addEventListener("input", tudo);
+addEventListener("hashchange", () => {
+  const d = DISCIPLINAS.find(d => "#"+d.id === location.hash); if (d) { disc = d.id; tudo(); }
+});
+tudo();
+</script>
+</body>
+</html>
