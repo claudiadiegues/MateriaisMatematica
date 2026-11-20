@@ -38,6 +38,11 @@ const TEMAS = [
 
 // ---------- EXEMPLOS: substitui pelos teus materiais ----------
 const MATERIAIS = [
-  { tema: "Estatística",         titulo: "Percentis",                    tipo: "slides", ficheiro: "U2-Estatistica/percentis.pdf",                data: "2026-10-20" },
-  { tema: "Geometria Sintética", titulo: "Pontos notáveis do triângulo", tipo: "slides", ficheiro: "U3-Geometria-Sintetica/pontos-notaveis.pdf", data: "2026-11-18" },
+  // ---------- U1 – Modelos ----------
+  { tema: "Modelos", titulo: "Sistemas maioritários",  tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/1-SistemasMaioritarios.pdf" },
+  { tema: "Modelos", titulo: "Sistemas preferenciais", tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/2-SistemasPreferenciais.pdf" },
+  { tema: "Modelos", titulo: "Modelos de partilha",    tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/3-ModelosPartilha.pdf" },
+  { tema: "Modelos", titulo: "Modelos de salários",    tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/4-ModelosSalarios.pdf" },
+  { tema: "Modelos", titulo: "Python",                 tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/5-Python.pdf" },
+
 ];
