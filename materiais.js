@@ -13,6 +13,10 @@
 //    ficheiro caminho do PDF, com a pasta (ou um link completo, começado por https://)
 //    data     "AAAA-MM-DD" — materiais dos últimos 7 dias aparecem como NOVO
 //    nota     (opcional) texto curto que aparece por baixo do título
+//    grupo    (opcional) bloco onde o material aparece dentro da unidade.
+//             Se nenhum material da unidade tiver grupo, aparecem por tipo
+//             (Slides, Fichas, ...). Materiais sem grupo numa unidade com
+//             grupos vão para "Outros".
 //
 //  Para esconder um material sem o apagar, põe // no início da linha.
 //  Use nomes de ficheiros e pastas sem acentos nem espaços.
@@ -27,8 +31,11 @@ const CONFIG = {
 // Temas, pela ordem em que aparecem na grelha.
 // "simbolo" é o que aparece em grande no cartão (pode ser texto curto).
 // Temas sem materiais também aparecem (como "em breve").
+// "grupos" (opcional) fixa a ordem dos grupos dentro da unidade;
+// sem isso, aparecem pela ordem em que surgem na lista de materiais.
 const TEMAS = [
-  { codigo: "U1", nome: "Modelos",             simbolo: "≈" },
+  { codigo: "U1", nome: "Modelos",             simbolo: "≈",
+    grupos: ["Sistemas eleitorais", "Modelos de partilha", "Modelos financeiros", "Python"] },
   { codigo: "U2", nome: "Estatística",         simbolo: "x̄" },
   { codigo: "U3", nome: "Geometria Sintética", simbolo: "△" },
   { codigo: "U4", nome: "Funções",             simbolo: "f(x)" },
@@ -39,10 +46,12 @@ const TEMAS = [
 // ---------- EXEMPLOS: substitui pelos teus materiais ----------
 const MATERIAIS = [
   // ---------- U1 – Modelos ----------
-  { tema: "Modelos", titulo: "Sistemas maioritários",  tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/1-SistemasMaioritarios.pdf" },
-  { tema: "Modelos", titulo: "Sistemas preferenciais", tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/2-SistemasPreferenciais.pdf" },
-  { tema: "Modelos", titulo: "Modelos de partilha",    tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/3-ModelosPartilha.pdf" },
-  { tema: "Modelos", titulo: "Modelos de salários",    tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/4-ModelosSalarios.pdf" },
-  { tema: "Modelos", titulo: "Python",                 tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/5-Python.pdf" },
+  { tema: "Modelos", grupo: "Apresentações", titulo: "Sistemas maioritários",  tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/1-SistemasMaioritarios.pdf" },
+  { tema: "Modelos", grupo: "Apresentações", titulo: "Sistemas preferenciais", tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/2-SistemasPreferenciais.pdf" },
+  { tema: "Modelos", grupo: "Apresentações", titulo: "Modelos de partilha",    tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/3-ModelosPartilha.pdf" },
+  { tema: "Modelos", grupo: "Apresentações", titulo: "Modelos de salários",    tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/4-ModelosSalarios.pdf" },
+  { tema: "Modelos", grupo: "Apresentações", titulo: "Python",                 tipo: "slides", ficheiro: "U1-Modelos/Apresentacoes/5-Python.pdf" },
+  // exemplo de ficha (troca pelo nome real do PDF):
+  // { tema: "Modelos", grupo: "Sistemas eleitorais", titulo: "Ficha de apoio 1", tipo: "ficha", ficheiro: "U1-Modelos/FichasdeApoio/NOME.pdf" },
 
 ];
